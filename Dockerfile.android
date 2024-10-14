@@ -1,5 +1,5 @@
 ARG img_version
-FROM godot-fedora:${img_version}
+FROM tekisasu-fedora:${img_version}
 
 ENV ANDROID_SDK_ROOT=/root/sdk
 ENV ANDROID_NDK_VERSION=23.2.8568313
