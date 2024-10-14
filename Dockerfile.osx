@@ -6,10 +6,10 @@ ENV OSX_SDK=14.5
 RUN dnf -y install --setopt=install_weak_deps=False \
       automake autoconf bzip2-devel cmake gcc gcc-c++ libdispatch libicu-devel libtool \
       libxml2-devel openssl-devel uuid-devel yasm && \
-    git clone --progress https://github.com/tpoechtrager/osxcross && \
+    git clone --progress https://github.com/TekisasuEngine/osxcross && \
     cd /root/osxcross && \
     git checkout ff8d100f3f026b4ffbe4ce96d8aac4ce06f1278b && \
-    curl -LO https://github.com/tpoechtrager/osxcross/pull/415.patch && \
+    curl -LO https://github.com/TekisasuEngine/osxcross/pull/415.patch && \
     git apply 415.patch && \
     ln -s /root/files/MacOSX${OSX_SDK}.sdk.tar.xz /root/osxcross/tarballs && \
     export UNATTENDED=1 && \
