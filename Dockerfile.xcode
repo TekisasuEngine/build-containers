@@ -1,9 +1,9 @@
 ARG img_version
-FROM godot-fedora:${img_version}
+FROM tekisasu-fedora:${img_version}
 
 RUN dnf -y install --setopt=install_weak_deps=False \
       clang xar xar-devel xz-devel cpio && \
-    git clone --progress https://github.com/nrosenstein-stuff/pbzx && \
+    git clone --progress https://github.com/TekisasuEngine/pbzx && \
     cd pbzx && \
     git checkout bf536e167f2e514866f91d7baa0df1dff5a13711 && \
     clang -O3 -llzma -lxar -I /usr/local/include pbzx.c -o pbzx

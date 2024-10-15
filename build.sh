@@ -5,23 +5,23 @@ basedir=$(cd $(dirname "$0"); pwd)
 source $basedir/setup.sh
 
 if [ -z "$1" -o -z "$2" ]; then
-  echo "Usage: $0 <godot branch> <base distro>"
+  echo "Usage: $0 <tekisasu branch> <base distro>"
   echo
   echo "Example: $0 4.x f39"
   echo
-  echo "godot branch:"
-  echo "        Informational, tracks the Godot branch these containers are intended for."
+  echo "tekisasu branch:"
+  echo "        Informational, tracks the Tekisasu branch these containers are intended for."
   echo
   echo "base distro:"
   echo "        Informational, tracks the base Linux distro these containers are based on."
   echo
-  echo "The resulting image version will be <godot branch>-<base distro>."
+  echo "The resulting image version will be <tekisasu branch>-<base distro>."
   exit 1
 fi
 
-godot_branch=$1
+tekisasu_branch=$1
 base_distro=$2
-img_version=$godot_branch-$base_distro
+img_version=$tekisasu_branch-$base_distro
 files_root="$basedir/files"
 
 if [ ! -z "$PS1" ]; then
@@ -40,14 +40,14 @@ fi
 
 mkdir -p logs
 
-"$podman" build -t godot-fedora:${img_version} -f Dockerfile.base . 2>&1 | tee logs/base.log
+"$podman" build -t tekisasu-fedora:${img_version} -f Dockerfile.base . 2>&1 | tee logs/base.log
 
 podman_build() {
   # You can add --no-cache as an option to podman_build below to rebuild all containers from scratch.
   "$podman" build \
     --build-arg img_version=${img_version} \
     -v "${files_root}":/root/files:z \
-    -t godot-"$1:${img_version}" \
+    -t tekisasu-"$1:${img_version}" \
     -f Dockerfile."$1" . \
     2>&1 | tee logs/"$1".log
 }
@@ -76,7 +76,7 @@ if [ ! -e "${files_root}"/MacOSX${OSX_SDK}.sdk.tar.xz ] || [ ! -e "${files_root}
     -e XCODE_SDKV="${XCODE_SDK}" \
     -e OSX_SDKV="${OSX_SDK}" \
     -e IOS_SDKV="${IOS_SDK}" \
-    godot-xcode:${img_version} \
+    tekisasu-xcode:${img_version} \
     2>&1 | tee logs/xcode_packer.log
 fi
 
