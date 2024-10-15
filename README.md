@@ -1,23 +1,22 @@
-# Godot engine build containers
+# Tekisasu Engine build containers
 
-This repository contains the Dockerfiles for the official Godot engine builds.
-These containers should help you build Godot for all platforms supported on
+This repository contains the Dockerfiles for the official Tekisasu Engine builds.
+These containers should help you build Tekisasu for all platforms supported on
 any machine that can run Docker containers.
 
 The in-container build scripts are in a separate repository:
-https://github.com/godotengine/godot-build-scripts
+https://github.com/TekisasuEngine/tekisasu-build-scripts
 
 
 ## Introduction
 
 These scripts build a number of containers which are then used to build final
-Godot tools, templates and server packages for several platforms.
+Tekisasu tools, templates and server packages for several platforms.
 
-Once these containers are built, they can be used to compile different Godot
+Once these containers are built, they can be used to compile different Tekisasu
 versions without the need of recreating them.
 
-The `upload.sh` file is meant to be used by Godot Release Team and is not
-documented here.
+The `upload.sh` file is used upstream and is only present as reference.
 
 
 ## Requirements
@@ -35,7 +34,7 @@ tried we ran into performance issues).
 
 The `build.sh` script included is used to build the containers themselves.
 
-The two arguments can take any value and are meant to convey what Godot branch
+The two arguments can take any value and are meant to convey what Tekisasu branch
 you are building for (e.g. `4.3`) and what Linux distribution the `Dockerfile.base`
 is based on (e.g. `f40` for Fedora 40).
 
@@ -45,7 +44,7 @@ Run the command using:
 
 The above will generate images using the tag '4.3-f40'.
 You can then specify it in the `build.sh` of
-[godot-build-scripts](https://github.com/godotengine/godot-build-scripts).
+[tekisasu-build-scripts](https://github.com/TekisasuEngine/tekisasu-build-scripts).
 
 
 ### Selecting which images to build
@@ -65,13 +64,13 @@ you can comment out the corresponding lines from the script:
 These are the expected container image sizes, so you can plan your disk usage in advance:
 
     REPOSITORY                         TAG                SIZE
-    localhost/godot-fedora             4.3-f40            1.01 GB
-    localhost/godot-linux              4.3-f40            2.80 GB
-    localhost/godot-windows            4.3-f40            2.46 GB
-    localhost/godot-web                4.3-f40            2.41 GB
-    localhost/godot-android            4.3-f40            4.29 GB
-    localhost/godot-osx                4.3-f40            4.78 GB
-    localhost/godot-ios                4.3-f40            5.49 GB
+    localhost/tekisasu-fedora             4.3-f40            1.01 GB
+    localhost/tekisasu-linux              4.3-f40            2.80 GB
+    localhost/tekisasu-windows            4.3-f40            2.46 GB
+    localhost/tekisasu-web                4.3-f40            2.41 GB
+    localhost/tekisasu-android            4.3-f40            4.29 GB
+    localhost/tekisasu-osx                4.3-f40            4.78 GB
+    localhost/tekisasu-ios                4.3-f40            5.49 GB
 
 In addition to this, generating containers will also require some host disk space
 (up to 10 GB) for the dependencies (Xcode).
@@ -79,11 +78,11 @@ In addition to this, generating containers will also require some host disk spac
 
 ## Toolchains
 
-These are the toolchains currently in use for Godot 4.3 and later:
+These are the toolchains currently in use for Tekisasu 4.3 and later:
 
 - Base image: Fedora 40
 - SCons: 4.8.0
-- Linux: GCC 13.2.0 built against glibc 2.28, binutils 2.40, from our own [Linux SDK](https://github.com/godotengine/buildroot)
+- Linux: GCC 13.2.0 built against glibc 2.28, binutils 2.40, from our own [Linux SDK](https://github.com/TekisasuEngine/buildroot)
 - Windows:
   * x86_64/x86_32: MinGW 11.0.1, GCC 14.1.1, binutils 2.41
   * arm64: llvm-mingw 20240619, LLVM 18.1.8
